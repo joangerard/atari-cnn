@@ -1,0 +1,68 @@
+\documentclass{beamer}
+
+\mode<presentation>{
+\usetheme{Dresden}
+\setbeamercovered{transparent}
+\usecolortheme{lsc}
+}
+
+\mode<handout>{
+  % tema simples para ser impresso
+  \usepackage[bar]{beamerthemetree}
+  % Colocando um fundo cinza quando for gerar transparências para serem impressas
+  % mais de uma transparência por página
+  \beamertemplatesolidbackgroundcolor{black!5}
+}
+
+\usepackage{amsmath,amssymb}
+\usepackage[brazil]{varioref}
+\usepackage[english,brazil]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{url}
+\usepackage{colortbl}
+\usepackage[ruled, linesnumbered]{algorithm2e}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\newcommand\Fontvi{\fontsize{6}{10}\selectfont}
+
+\beamertemplatetransparentcovereddynamic
+
+\title[Machine Learning for Probabilistic Robotics with Webots]{Atari Games with Deep Q Network}
+\author[Niklaus Geisser, Joan Gerard]{%
+  Niklaus Geisser\inst{1}\\
+  Joan Gerard\inst{1}}
+  \institute[ULB]{
+  \inst{1}%
+     Universit\'e Libre de Bruxelles}
+
+\date{March 20, 2020}
+
+\AtBeginSection[]{
+  \begin{frame}<beamer>
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Table of Contents}
+\tableofcontents
+\end{frame}
+
+\input{chapters/first}
+
+\input{chapters/second}
+
+\input{chapters/third}
+
+\end{document}
