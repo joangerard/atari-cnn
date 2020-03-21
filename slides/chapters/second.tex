@@ -1,15 +1,57 @@
 \section{Architecture of DQN}
-
+\pgfdeclareimage[height=4.5cm]{A_DQN}{figs/a_dqn.png}
+\pgfdeclareimage[height=2.4cm]{REPLAY}{figs/replay.png}
 \frame{
-	\frametitle{Second Part}
-	\begin{itemize}
-		\item First Point
-		\item Second Point
-		
-	\end{itemize}
+	\frametitle{Architecture!}
+	There are several components involved when building a DQN.
+	\pgfuseimage{A_DQN}
 }
 
+%Maybe show a diagram like this one illustrating the main idea of how it works%
+
 \subsection{Convolutional Neural Network}
+\frame{
+	\frametitle{CNN}
+	\begin{itemize}
+		\item Two convolutional layers used to understand the game state (identifying spatial relationship between objects).
+		\item Downsample pixels and convert to grayscale.
+		\item No pooling layers.
+		\item We consider the past four game screens.
+	\end{itemize}
+
+}
 \subsection{Experience Replay}
+\frame{
+	\frametitle{Experience Replay}
+		\begin{itemize}
+	\item We can define a \textbf{transition} as the process of going to a state s' from an initial state $s$ by taking an action $a$ and receiving a reward $r$.
+
+	   	\item Transitions are saved into a replay buffer which represent the agent's "experience"
+		\item We train the DQN by selecting a random batch from the replay buffer in order to reduce the correlation in the agent's experience.
+
+	\end{itemize}
+	\begin{center}
+    \pgfuseimage{REPLAY}
+    \end{center}
+
+}
 \subsection{Target Network}
+\frame{
+	\frametitle{Target Network}
+		\begin{itemize}
+	\item The loss function computes the squared difference between the target and predicted values using the same Q function.
+	    \[Loss = (r + \gamma \max_aQ(s',a';\theta) - Q(s',a';\theta))^2 \]
+
+		\item There can be convergence issues since the same network is computing both target and predicted values. To overcome this problem, we can define a "target" network.
+
+		\item The weights ($\theta'$) of this new network will be updated after several time steps by copying the weights ($\theta$) of the original Q network.
+		\[Loss = (r + \gamma \max_aQ(s',a';\theta') - Q(s',a';\theta))^2 \]
+
+	\end{itemize}
+
+}
 \subsection{Clipping Rewards}
+\frame{
+	\frametitle{Clipping Rewards}
+	Each game has a different scale regarding scores. For instance in SpaceInvaders, players can get 15 ~ 30 points for defeating an enemy, whereas in a pong game players get 1 point when winning the game and -1 otherwise. This can cause the training to be unstable. Therefore, rewards will be clipped to -1 and +1.
+}
