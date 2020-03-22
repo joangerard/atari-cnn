@@ -31,6 +31,12 @@
 
 \beamertemplatetransparentcovereddynamic
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% BIBLIOGRAPHIC REFERENCES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[sorting=none]{biblatex}
+\addbibresource{references.bib}
+
 \title[Machine Learning for Probabilistic Robotics with Webots]{Atari Games with Deep Q Network}
 \author[Niklaus Geisser, Joan Gerard]{%
   Niklaus Geisser\inst{1}\\
@@ -44,7 +50,9 @@
 \AtBeginSection[]{
   \begin{frame}<beamer>
     \frametitle{Table of Contents}
+    {\footnotesize
     \tableofcontents[currentsection,currentsubsection]
+    }
   \end{frame}
 }
 
@@ -56,7 +64,9 @@
 
 \begin{frame}
 \frametitle{Table of Contents}
+ {\footnotesize
 \tableofcontents
+}
 \end{frame}
 
 \input{chapters/first}
@@ -64,5 +74,7 @@
 \input{chapters/second}
 
 \input{chapters/third}
+
+\input{references}
 
 \end{document}

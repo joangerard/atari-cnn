@@ -2,16 +2,105 @@
 \section{What is Deep Reinforcement Learning?}
 
 \frame{
-	\frametitle{First Part}
+	\frametitle{Reinforcement Learning (RL) Review}
+	
 	\begin{itemize}
-		\item First Point
-		\item Second Point
-		
+		\item It is the science of decision making.
+		\item It involves no supervisor and only a \textbf{reward signal} is used for an agent to determine if they are doing well or not. 
+		\item A \textbf{policy}, $\pi$, is a mapping from perceived states of the environment to actions to be taken when in those states.
+		\item A \textbf{state}, $s$ is a concrete and immediate situation in which the agent finds itself.
+		\item A \textbf{Q function}, also called a state-action value function, specifies how good an action $a$ is in the state $s$.
+	\end{itemize}
+}
+
+\pgfdeclareimage[height=3cm]{FRAMEWORK}{figs/framework-rl.png}
+
+\frame {
+	\frametitle{Reinforcement Learning (RL) Review}
+	\begin{itemize}
+		\item The \textbf{value of a state} is the total amount of reward an agent can expect to accumulate over the future, starting from that state.
+		\item Each \textbf{action} the agent makes affects the next data it receives.
+		\item \textbf{Q-value} is the long-term return of an action taking action $a$ under policy $\pi$ from the current state $s$
+	\end{itemize}
+	\centering
+	\pgfuseimage{FRAMEWORK}
+
+}
+
+\frame{
+	\frametitle{Deep Reinforcement Learning}
+	\textbf{Definition}\\
+	Deep reinforcement learning combines \textbf{deep learning} with a \textbf{reinforcement learning} architecture that enables software-defined agents to learn the best actions possible in virtual environment in order 	to attain their goals.
+}
+
+\frame {
+	\frametitle{Deep Reinforcement Learning}
+	\begin{itemize}
+		\item RL: finite number of states with finite number of actions. Exhaustive search through all (state, action) pairs to find optimal Q-value: $Q^*(s,a)$.
+		\item DRL: very large amount of states, each with lots of actions to try. Approximate Q function with some parameter $\theta$ such that $Q(s, a, \theta) \approx Q^*(s, a)$
 	\end{itemize}
 }
 
 \section{Deep Q Networks (DQN)}
 
 \subsection{Update Rule}
+\frame{
+	\frametitle{Deep Q Networks: Update Rule}
+	
+	\begin{itemize}
+		\item It uses a neural network with weights $\theta$ to approximate the Q-values for all possible actions in each state. It is called \textbf{Q-network}.
+		\item Q learning update rule: 
+		\begin{equation}
+			Q(s,a) = Q(s,a) + \alpha (r + \gamma maxQ(s^\prime, a^\prime) - Q(s,a))
+		\end{equation}
+		\item $Q(s,a)$ is the current Q-value.
+		\item $\alpha$ is the learning rate.
+		\item $r$ is the reward for taking action $a$ when in state $s$.
+		\item $\gamma$ is the discount rate.
+		\item $max Q(s^\prime, a^\prime)$ is the maximum future expected reward given the new state $s^\prime$ and all possible actions at the new state. 
+	\end{itemize}
+}
+
 \subsection{Target and Predicted value}
+\frame {
+	\frametitle{Deep Q Networks: Target and Predicted value}
+	\centering
+	$Q(s,a) = Q(s,a) + \alpha (r + \gamma maxQ(s^\prime, a^\prime) - Q(s,a))$
+
+	\begin{itemize}
+		\item $r + \gamma maxQ(s^\prime, a^\prime)$ is the target value. 
+		\item Q(s,a) is the predicted value.
+		\item Minimize value by learning an optimal policy. 
+		
+	\end{itemize}
+}
+
+
+
 \subsection{Loss Function}
+
+\frame {
+	\frametitle{Deep Q Networks: Loss Function}
+	\begin{itemize}
+		\item Minimize the weights $\theta$.
+		\begin{equation}
+			Loss = (y_i - Q(s, a; \theta)) ^ 2
+		\end{equation}
+		\item Where $y_i = r + \gamma max_{a^\prime}Q(s^\prime, a^\prime; \theta)$.
+		\item Update the weights and minimize the loss through gradient descent.
+	\end{itemize}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

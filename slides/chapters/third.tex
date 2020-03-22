@@ -1,18 +1,51 @@
 \section{Building it!}
 
-\pgfdeclareimage[height=3cm]{DIAGRAM}{figs/diagram.png}
+\pgfdeclareimage[height=6cm]{DIAGRAM}{figs/diagram.png}
 
 \frame{
 	\frametitle{Main Idea}
 	%Maybe show a diagram like this one illustrating the main idea of how it works%
+	\centering
 	\pgfuseimage{DIAGRAM}
 }
 
 \subsection{Libraries} %list the most important libraries we're using%
 	%special mention to GYM this one since is the one that allows us to integrate the program with the Atari console%
+\pgfdeclareimage[height=6cm]{GYM}{figs/gym.png}
+\pgfdeclareimage[height=1cm]{TF}{figs/tf.png}
+
+\frame{
+	\frametitle{Libraries}
+	\begin{columns}
+		\column{6cm}
+		\pgfuseimage{GYM}
+		\column{5cm}
+		\pgfuseimage{TF}
+		\begin{itemize}
+			\item Gym emulates:
+			\begin{itemize}
+				\item Atari games
+				\item Box2D simulator
+				\item Classic control: Cart Pole
+				\item MuJoCo: physics simulator
+				\item Robotics: Fetch and Push
+			\end{itemize}
+		\end{itemize}
+		
+	\end{columns}
+}
 	
 \subsection{Experiments}
-%show how many epochs it runs, epsilon greedy param, for what games, etc.%
+\frame{
+	\frametitle{Experiments: Parameters} 
+	\begin{itemize}
+		\item Atari Games: Space Invader, Breakout
+		\item Decaying epsilon-greedy policy starting at 0.05.
+		\item Number of epochs: 20000.
+		\item Learning rate $\alpha = 0.001$.
+		\item Discount factor $\gamma = 0.97$.
+	\end{itemize}
+}
 
 \section{Results}
 % show a graph indicating the reward at each epoch
