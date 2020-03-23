@@ -3,6 +3,7 @@ import gym
 import tensorflow as tf
 from tensorflow.contrib.layers import flatten, conv2d, fully_connected
 from collections import deque, Counter
+import pickle
 import random
 from datetime import datetime
 
@@ -122,7 +123,7 @@ if __name__ == '__main__':
     """
 
     # num_episodes = 800
-    num_episodes = 1010
+    num_episodes = 3000
     batch_size = 48
     input_shape = (None, 88, 80, 1)
     learning_rate = 0.001
@@ -162,9 +163,9 @@ if __name__ == '__main__':
 
         # define the placeholder for our action values
         # X_action = tf.placeholder(tf.int32, shape=(None,))
-        # Q_action = tf.reduce_sum(targetQ_outputs * tf.one_hot(X_action, n_outputs), axis=-1, keep_dims=True)
+        Q_action = tf.reduce_sum(targetDQN.output * tf.one_hot(X_action, n_outputs), axis=-1, keep_dims=True)
 
-        Q_action = targetDQN.get_Q_action()
+        # Q_action = targetDQN.get_Q_action()
 
         """
         Copy the primary Q network parameters to the target Q network
@@ -198,6 +199,7 @@ if __name__ == '__main__':
         init.run()
 
         # for each episode
+        rewards = []
         for i in range(num_episodes):
             print("episode: ", i)
             done = False
@@ -263,17 +265,23 @@ if __name__ == '__main__':
                                              feed_dict={X: o_obs, y: np.expand_dims(y_batch, axis=-1), X_action: o_act,
                                                         in_training_mode: True})
                     episodic_loss.append(train_loss)
+                    if (i + 1) % 50 == 0:
+                        print("episodic loss")
+                        print(episodic_loss)
 
                 # after some interval we copy our main Q network weights to target Q network
                 if (global_step + 1) % copy_steps == 0 and global_step > start_steps:
                     copy_target_to_main.run()
 
-                if (i + 1) % 999 == 0:
-                    mainDQN.save(episode=i)
-                    targetDQN.save(episode=i)
                 obs = next_obs
                 epoch += 1
                 global_step += 1
-                episodic_reward += reward
 
+                episodic_reward += reward
             print('Epoch', epoch, 'Reward', episodic_reward, )
+            rewards.append(episodic_reward)
+            if (i + 1) % 100 == 0:
+                mainDQN.save(episode=i)
+                targetDQN.save(episode=i)
+                pickle.dump(rewards, open('./rewards/trained-model-'+str(i)+'.pck', 'wb+'))
+        print("episode {0}, global_step {1}".format(i,global_step))

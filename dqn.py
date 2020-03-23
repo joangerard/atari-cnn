@@ -23,6 +23,7 @@ class DQN:
         self._build_network()
         self.saver = tf.train.Saver()
         self.save_path = "./save/break/save_model_" + self.net_name + ".ckpt"
+        # self.save_path2 = "./save/break/model_dqn"
         tf.logging.info(name + " - initialized")
 
     def _build_network(self, l_rate=0.3):
@@ -68,6 +69,8 @@ class DQN:
 
     def restore(self, episode=0):
         load_path = self.save_path + "-" + str(episode)
+        # load_path2 = self.save_path2 + "-" + str(episode)
+        print(load_path)
         self.saver.restore(self.session, load_path)
 
     def get_Q_action(self):

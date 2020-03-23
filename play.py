@@ -20,7 +20,7 @@ if __name__ == '__main__':
         X_action = tf.placeholder(tf.int32, shape=(None,))
         mainDQN = DQN(sess, X, X_action, n_outputs, name="main")
         targetDQN = DQN(sess, X, X_action, n_outputs, name="target")
-        episode = 998
+        episode = 2899
         for i in range(9):
             done = False
             obs = env.reset()
@@ -42,7 +42,7 @@ if __name__ == '__main__':
                 # get the action
 
                 p = np.random.random(1).squeeze()
-                action = np.argmax(actions, axis=-1) if p > 0.1 else np.random.randint(n_outputs)
+                action = np.argmax(actions, axis=-1) if p > 0.05 else np.random.randint(n_outputs)
                 print("Action to play: ", action)
 
                 # now perform the action and move to the next state, next_obs, receive reward
