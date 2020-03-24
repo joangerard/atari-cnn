@@ -1,6 +1,7 @@
 \section{Architecture of DQN}
 \pgfdeclareimage[height=4.5cm]{A_DQN}{figs/a_dqn.png}
-\pgfdeclareimage[height=2.4cm]{REPLAY}{figs/replay.png}
+\pgfdeclareimage[height=2.3cm]{REPLAY}{figs/replay.png}
+\pgfdeclareimage[height=4.5cm]{COMPARISON}{figs/comparison.png}
 \frame{
 	\frametitle{Architecture!}
 	There are several components involved when building a DQN.
@@ -13,10 +14,21 @@
 \frame{
 	\frametitle{CNN}
 	\begin{itemize}
-		\item Two convolutional layers used to understand the game state (identifying spatial relationship between objects).
+		\item Convolutional layers are used to understand the game state (identifying spatial relationship between objects).
 		\item Downsample pixels and convert to grayscale.
 		\item No pooling layers.
 		\item We consider the past four game screens.
+	\end{itemize}
+
+}
+\frame{
+	\frametitle{Layers of CNN}
+	\begin{itemize}
+		\item \textbf{Input layer :} 32 filters 8 x 8
+		\item \textbf{First layer :} 64 filters 4 x 4.
+		\item \textbf{Second layer :} 64 filters 3 x 3.
+		\item \textbf{Third layer :} Fully connected 128 neurons.
+		\item \textbf{Output layer :} Fully connected (\#actions).
 	\end{itemize}
 
 }
@@ -53,5 +65,8 @@
 \subsection{Clipping Rewards}
 \frame{
 	\frametitle{Clipping Rewards}
-	Each game has a different scale regarding scores. For instance in SpaceInvaders, players can get 15 ~ 30 points for defeating an enemy, whereas in a pong game players get 1 point when winning the game and -1 otherwise. This can cause the training to be unstable. Therefore, rewards will be clipped to -1 and +1.
+	Rewards will be clipped to -1 and +1. 
+	\begin{center}
+    \pgfuseimage{COMPARISON}
+    \end{center}
 }
