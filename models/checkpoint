@@ -1,0 +1,6 @@
+model_checkpoint_path: "trained-model-3950"
+all_model_checkpoint_paths: "trained-model-3750"
+all_model_checkpoint_paths: "trained-model-3800"
+all_model_checkpoint_paths: "trained-model-3850"
+all_model_checkpoint_paths: "trained-model-3900"
+all_model_checkpoint_paths: "trained-model-3950"
