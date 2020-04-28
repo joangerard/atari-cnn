@@ -9,3 +9,10 @@
 *.bcf
 *.run.xml
 *~*.docx
+*.meta
+*.pck
+*.local
+*-it-model/*
+checkpoint
+models/*
+.ipynb_checkpoints/*
