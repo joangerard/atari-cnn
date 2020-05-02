@@ -37,15 +37,19 @@
 	
 \subsection{Experiments}
 \frame{
-	\frametitle{Experiments: Parameters} 
+	\frametitle{Experiments: Parameters for Space Invaders} 
 	\begin{itemize}
-		\item Atari Games: Space Invader, Breakout
-		\item Decaying epsilon-greedy policy starting at 0.05.
-		\item Number of epochs: 20000.
-		\item Learning rate $\alpha = 0.001$.
-		\item Discount factor $\gamma = 0.97$.
+		\item Decaying $\epsilon$-greedy policy starting at 0.95 to 0.05.
+		\item Number of episodes: 15000.
+		\item Learning rate $\alpha = 0.00025$.
+		\item Discount factor $\gamma = 0.9$.
+		\item Buffer length is 20000 with batch size of 64.
 	\end{itemize}
 }
 
+\pgfdeclareimage[height=4cm]{RESULT-SI}{figs/avg_reward_si.png}
 \section{Results}
-% show a graph indicating the reward at each epoch
+\frame{
+	\frametitle{Results for Space Invaders}
+	\pgfuseimage{RESULT-SI}
+}
